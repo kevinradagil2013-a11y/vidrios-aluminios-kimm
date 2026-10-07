@@ -1,0 +1,4 @@
+﻿User-agent: *
+Allow: /
+
+Sitemap: https://vidrios-aluminios-kimm.onrender.com/sitemap.xml
