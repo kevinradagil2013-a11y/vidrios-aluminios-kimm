@@ -10,7 +10,10 @@ export const KIMM_WHATSAPP_MESSAGES = {
   promotion:
     "Hola KIMM 👋, vi la promoción del 10% de descuento + reposa toallas de regalo y quiero cotizar.",
 
-  advisor:
+  gift:
+      "Hola KIMM 👋, vi la promoción del reposa toallas de regalo y quiero conocer cómo acceder a la promoción.",
+
+    advisor:
     "Hola KIMM 👋, quiero hablar con un asesor sobre mi proyecto.",
 };
 

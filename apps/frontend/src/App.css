@@ -1200,3 +1200,323 @@ a {
     font-size: 44px;
   }
 }
+/* ============================================================
+   KIMM — PROMOCIÓN EXÓTICA / PREMIUM
+   ============================================================ */
+
+.promo-exotic {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 82% 20%, rgba(82, 220, 255, 0.14), transparent 28%),
+    linear-gradient(135deg, #071017 0%, #0b171f 55%, #101d25 100%);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.promo-exotic::before {
+  content: "";
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  right: -170px;
+  top: -220px;
+  border: 1px solid rgba(109, 225, 255, 0.14);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 45px rgba(109, 225, 255, 0.025),
+    0 0 0 90px rgba(109, 225, 255, 0.018);
+  pointer-events: none;
+}
+
+.promo-exotic-inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  gap: 24px;
+  align-items: stretch;
+  padding-top: 34px;
+  padding-bottom: 34px;
+}
+
+.promo-offer,
+.promo-gift-card {
+  position: relative;
+  min-width: 0;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.045);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.promo-offer {
+  padding: 30px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.promo-kicker,
+.promo-gift-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  font-weight: 800;
+  color: #74dcf8;
+}
+
+.promo-discount {
+  margin: 14px 0 10px;
+  display: flex;
+  align-items: baseline;
+  gap: 13px;
+  flex-wrap: wrap;
+}
+
+.promo-discount span {
+  font-size: clamp(64px, 7vw, 94px);
+  line-height: 0.85;
+  letter-spacing: -0.07em;
+  font-weight: 900;
+  color: #ffffff;
+}
+
+.promo-discount strong {
+  font-size: 15px;
+  letter-spacing: 0.12em;
+  color: #74dcf8;
+}
+
+.promo-description {
+  max-width: 570px;
+  margin: 14px 0 10px;
+  color: rgba(255,255,255,0.78);
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.promo-conditions {
+  font-size: 10px;
+  color: rgba(255,255,255,0.42);
+  letter-spacing: 0.04em;
+}
+
+.promo-button,
+.promo-gift-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  width: fit-content;
+  text-decoration: none;
+  transition:
+    transform 180ms ease,
+    background 180ms ease,
+    border-color 180ms ease;
+}
+
+.promo-button {
+  margin-top: 22px;
+  padding: 13px 18px;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #081017;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+
+.promo-button:hover,
+.promo-gift-link:hover {
+  transform: translateY(-2px);
+}
+
+.promo-gift-card {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(190px, 1.1fr);
+  min-height: 280px;
+}
+
+.promo-gift-copy {
+  padding: 28px 24px 26px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.promo-gift-copy h3 {
+  margin: 11px 0 9px;
+  font-size: clamp(27px, 3vw, 42px);
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+  color: #ffffff;
+}
+
+.promo-gift-copy p {
+  margin: 0;
+  color: rgba(255,255,255,0.65);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.promo-finishes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px 13px;
+  margin-top: 16px;
+}
+
+.promo-finishes span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 9px;
+  color: rgba(255,255,255,0.62);
+}
+
+.finish-dot {
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
+.finish-black {
+  background: #101214;
+}
+
+.finish-gray {
+  background: #777b80;
+}
+
+.finish-silver {
+  background: linear-gradient(135deg, #d8dde0, #73787d);
+}
+
+.promo-gift-link {
+  margin-top: 18px;
+  color: #74dcf8;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+}
+
+.promo-gift-image {
+  position: relative;
+  min-height: 280px;
+  overflow: hidden;
+  background: #10181d;
+}
+
+.promo-gift-image img {
+  width: 100%;
+  height: 100%;
+  min-height: 280px;
+  display: block;
+  object-fit: cover;
+  transition: transform 500ms ease;
+}
+
+.promo-gift-card:hover .promo-gift-image img {
+  transform: scale(1.045);
+}
+
+.promo-gift-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(7,16,23,0.36), transparent 38%),
+    linear-gradient(0deg, rgba(7,16,23,0.45), transparent 45%);
+  pointer-events: none;
+}
+
+.promo-gift-image > span {
+  position: absolute;
+  left: 16px;
+  bottom: 14px;
+  z-index: 2;
+  font-size: 8px;
+  letter-spacing: 0.16em;
+  font-weight: 800;
+  color: rgba(255,255,255,0.72);
+}
+
+@media (max-width: 950px) {
+  .promo-exotic-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .promo-gift-card {
+    min-height: 300px;
+  }
+}
+
+@media (max-width: 650px) {
+  .promo-exotic-inner {
+    gap: 14px;
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+
+  .promo-offer {
+    padding: 25px 21px;
+  }
+
+  .promo-discount {
+    gap: 9px;
+  }
+
+  .promo-discount span {
+    font-size: 66px;
+  }
+
+  .promo-discount strong {
+    font-size: 12px;
+  }
+
+  .promo-description {
+    font-size: 13px;
+  }
+
+  .promo-gift-card {
+    grid-template-columns: 1fr;
+  }
+
+  .promo-gift-copy {
+    padding: 24px 21px 21px;
+  }
+
+  .promo-gift-image {
+    min-height: 230px;
+  }
+
+  .promo-gift-image img {
+    min-height: 230px;
+    max-height: 300px;
+  }
+}
+
+@media (max-width: 400px) {
+  .promo-discount span {
+    font-size: 57px;
+  }
+
+  .promo-discount strong {
+    width: 100%;
+  }
+
+  .promo-button {
+    width: 100%;
+  }
+
+  .promo-gift-copy h3 {
+    font-size: 32px;
+  }
+}

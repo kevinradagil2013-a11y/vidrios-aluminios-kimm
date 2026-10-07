@@ -196,7 +196,7 @@ function App() {
                   Solicitar cotización <ArrowRight size={18} />
                 </a>
 
-                <a className="button button-ghost" href="#proyectos">
+                <a className="button button-ghost" href="#referencias">
                   Ver proyectos <ChevronRight size={18} />
                 </a>
               </div>
@@ -219,23 +219,94 @@ function App() {
           </div>
         </section>
 
-        <section className="promo">
-          <div className="container promo-inner">
-            <div className="promo-label">
-              <Sparkles size={18} />
-              PROMOCIÓN KIMM
+                <section className="promo promo-exotic">
+          <div className="container promo-exotic-inner">
+
+            <div className="promo-offer">
+              <div className="promo-kicker">
+                <Sparkles size={16} />
+                OFERTA ESPECIAL KIMM
+              </div>
+
+              <div className="promo-discount">
+                <span>10%</span>
+                <strong>DE DESCUENTO</strong>
+              </div>
+
+              <p className="promo-description">
+                En cabinas de baño, espejos personalizados,
+                ventanería, divisiones y otras soluciones KIMM.
+              </p>
+
+              <span className="promo-conditions">
+                En proyectos seleccionados · Aplican condiciones
+              </span>
+
+              <a
+                className="promo-button"
+                href={buildWhatsAppUrl(KIMM_WHATSAPP_MESSAGES.promotion)}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Cotizar con el 10% <ArrowRight size={17} />
+              </a>
             </div>
 
-            <div className="promo-main">
-              <strong>10% de descuento</strong>
-              <span>+</span>
-              <strong>Reposa toallas de regalo</strong>
-              <small>En proyectos seleccionados · Aplican condiciones</small>
+            <div className="promo-gift-card">
+
+              <div className="promo-gift-copy">
+                <span className="promo-gift-tag">
+                  REGALO KIMM
+                </span>
+
+                <h3>
+                  Reposa toallas
+                  <br />
+                  en aluminio
+                </h3>
+
+                <p>
+                  Un detalle funcional para darle
+                  un acabado especial a tu baño.
+                </p>
+
+                <div className="promo-finishes">
+                  <span>
+                    <i className="finish-dot finish-black" />
+                    Negro mate
+                  </span>
+
+                  <span>
+                    <i className="finish-dot finish-gray" />
+                    Gris
+                  </span>
+
+                  <span>
+                    <i className="finish-dot finish-silver" />
+                    Otros acabados
+                  </span>
+                </div>
+
+                <a
+                  className="promo-gift-link"
+                  href={buildWhatsAppUrl(KIMM_WHATSAPP_MESSAGES.gift)}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Quiero mi regalo <ArrowRight size={16} />
+                </a>
+              </div>
+
+              <div className="promo-gift-image">
+                <img
+                  src="/kimm-reposa-toallas.webp"
+                  alt="Reposa toallas de aluminio"
+                />
+                <span>DETALLE DE PROMOCIÓN</span>
+              </div>
+
             </div>
 
-            <a href={buildWhatsAppUrl(KIMM_WHATSAPP_MESSAGES.quote)}>
-              Preguntar por la promoción <ArrowRight size={16} />
-            </a>
           </div>
         </section>
 
