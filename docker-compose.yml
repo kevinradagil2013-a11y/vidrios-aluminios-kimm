@@ -5,9 +5,9 @@ services:
     container_name: kimm-postgres
     restart: unless-stopped
     environment:
-      POSTGRES_DB: kimm
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: ${POSTGRES_DB:-kimm}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
     ports:
       - "5434:5432"
     volumes:
@@ -23,7 +23,7 @@ services:
       NODE_ENV: production
       HOST: 0.0.0.0
       PORT: 3107
-      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/kimm
+      DATABASE_URL: ${DATABASE_URL:-postgresql://postgres:postgres@postgres:5432/kimm}
     ports:
       - "3107:3107"
     depends_on:
@@ -34,7 +34,7 @@ services:
       context: .
       dockerfile: apps/frontend/Dockerfile
       args:
-        VITE_CONTACT_API_URL: http://localhost:3107
+        VITE_CONTACT_API_URL: ${VITE_CONTACT_API_URL:-http://localhost:3107}
     container_name: kimm-frontend
     restart: unless-stopped
     ports:
