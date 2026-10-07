@@ -101,9 +101,6 @@ function App() {
     const apiUrl =
       import.meta.env.VITE_CONTACT_API_URL ?? "http://localhost:3107";
 
-    console.log("KIMM API URL:", apiUrl);
-    console.log("KIMM payload:", payload);
-
     setIsSubmitting(true);
     setSubmitMessage("");
 
@@ -116,11 +113,7 @@ function App() {
         body: JSON.stringify(payload),
       });
 
-      console.log("KIMM response status:", response.status);
-
       const data = await response.json();
-
-      console.log("KIMM response:", data);
 
       if (!response.ok) {
         throw new Error(
@@ -136,7 +129,6 @@ function App() {
 
       form.reset();
     } catch (error) {
-      console.error("KIMM contact error:", error);
 
       setSubmitMessage(
         error instanceof Error
@@ -161,7 +153,6 @@ function App() {
 
           <nav className="nav">
             <a href="#referencias">Referencias</a>
-            <a href="#proyectos">Referencias</a>
             <a href="#proceso">Cómo trabajamos</a>
             <a href="#nosotros">Nosotros</a>
           </nav>
@@ -569,7 +560,6 @@ function App() {
           <div>
             <span className="footer-title">Navegación</span>
             <a href="#referencias">Referencias</a>
-            <a href="#proyectos">Referencias</a>
             <a href="#proceso">Proceso</a>
             <a href={buildWhatsAppUrl(KIMM_WHATSAPP_MESSAGES.quote)}>Cotizar</a>
           </div>
@@ -582,7 +572,7 @@ function App() {
         </div>
 
         <div className="container footer-bottom">
-          <span>© 2026 Vidrios y Aluminios KIMM</span>
+          <span>Ã‚© 2026 Vidrios y Aluminios KIMM</span>
           <span>Diseño · Precisión · Arquitectura</span>
         </div>
       </footer>
