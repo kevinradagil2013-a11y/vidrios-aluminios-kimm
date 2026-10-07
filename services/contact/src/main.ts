@@ -1,9 +1,10 @@
-import "dotenv/config";
+﻿import "dotenv/config";
 import Fastify from "fastify";
 import cors from "@fastify/cors";
 import { createContactSchema } from "./application/contact-schema.js";
 import { CreateContact } from "./application/create-contact.js";
 import { ContactRepository } from "./infrastructure/contact-repository.js";
+import { initializeDatabase } from "./infrastructure/database-init.js";
 
 const app = Fastify({
   logger: true,
@@ -70,11 +71,14 @@ process.on("SIGTERM", shutdown);
 process.on("SIGINT", shutdown);
 
 try {
+  await initializeDatabase();
+
   await app.listen({
     port,
     host,
   });
 } catch (error) {
   app.log.error(error);
+  await repository.close();
   process.exit(1);
 }
