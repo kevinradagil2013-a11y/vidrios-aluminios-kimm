@@ -4,8 +4,8 @@ services:
     runtime: node
     plan: free
     rootDir: .
-    buildCommand: npm ci && npm.cmd --workspace services/contact run build
-    startCommand: npm.cmd --workspace services/contact run start
+    buildCommand: npm ci && npm --workspace services/contact run build
+    startCommand: npm --workspace services/contact run start
     healthCheckPath: /health
     envVars:
       - key: NODE_ENV
@@ -22,7 +22,9 @@ services:
   - type: web
     name: kimm-frontend
     runtime: static
-    buildCommand: npm ci && npm.cmd --workspace apps/frontend run build
+    plan: free
+    rootDir: .
+    buildCommand: npm ci && npm --workspace apps/frontend run build
     staticPublishPath: ./apps/frontend/dist
     envVars:
       - key: VITE_CONTACT_API_URL
