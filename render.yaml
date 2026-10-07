@@ -1,4 +1,4 @@
-services:
+﻿services:
   - type: web
     name: kimm-contact-api
     runtime: node
@@ -22,7 +22,6 @@ services:
   - type: web
     name: vidrios-aluminios-kimm
     runtime: static
-    plan: free
     rootDir: .
     buildCommand: npm ci && npm --workspace apps/frontend run build
     staticPublishPath: ./apps/frontend/dist
