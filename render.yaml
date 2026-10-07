@@ -4,7 +4,7 @@
     runtime: node
     plan: free
     rootDir: .
-    buildCommand: npm ci && npm --workspace services/contact run build
+    buildCommand: npm ci --include=dev && npm --workspace services/contact run build
     startCommand: npm --workspace services/contact run start
     healthCheckPath: /health
     envVars:
@@ -23,7 +23,7 @@
     name: vidrios-aluminios-kimm
     runtime: static
     rootDir: .
-    buildCommand: npm ci && npm --workspace apps/frontend run build
+    buildCommand: npm ci --include=dev && npm --workspace apps/frontend run build
     staticPublishPath: ./apps/frontend/dist
     envVars:
       - key: VITE_CONTACT_API_URL
