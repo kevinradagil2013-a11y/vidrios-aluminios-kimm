@@ -1,6 +1,11 @@
 import { buildWhatsAppUrl, KIMM_WHATSAPP_MESSAGES } from "./config/contact";
+import { analyzeProject } from "./intelligence/project-intelligence";
+import { buildPromotionWhatsAppMessage } from "./intelligence/whatsapp-builder";
 import { KIMM_IMAGES } from "./config/images";
-import { useState } from "react";
+import { SmartQuote } from "./components/SmartQuote";
+import { SmartWhatsAppButton } from "./components/SmartWhatsAppButton";
+import { loadProjectSession, saveProjectSession } from "./intelligence/session-memory";
+import { useEffect, useState } from "react";
 import type { FormEvent } from "react";
 import {
   ArrowRight,
@@ -83,6 +88,15 @@ const process = [
 function App() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState("");
+  const [projectDescription, setProjectDescription] = useState(() => loadProjectSession()?.description ?? "");
+
+  const projectProfile = analyzeProject(projectDescription);
+
+  useEffect(() => {
+    if (projectDescription.trim()) {
+      saveProjectSession(projectDescription, projectProfile);
+    }
+  }, [projectDescription]);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -161,9 +175,12 @@ function App() {
             <a href="#nosotros">Nosotros</a>
           </nav>
 
-          <a className="header-cta" href={buildWhatsAppUrl(KIMM_WHATSAPP_MESSAGES.quote)}>
-            Cotizar <ArrowRight size={16} />
-          </a>
+          <SmartWhatsAppButton
+  profile={projectProfile}
+  className="header-cta"
+>
+  Cotizar <ArrowRight size={16} />
+</SmartWhatsAppButton>
         </div>
       </header>
 
@@ -192,9 +209,12 @@ function App() {
               </p>
 
               <div className="hero-actions">
-                <a className="button button-primary" href={buildWhatsAppUrl(KIMM_WHATSAPP_MESSAGES.quote)}>
-                  Solicitar cotización <ArrowRight size={18} />
-                </a>
+                <SmartWhatsAppButton
+  profile={projectProfile}
+  className="button button-primary"
+>
+  Solicitar cotización <ArrowRight size={18} />
+</SmartWhatsAppButton>
 
                 <a className="button button-ghost" href="#referencias">
                   Ver proyectos <ChevronRight size={18} />
@@ -244,7 +264,7 @@ function App() {
 
               <a
                 className="promo-button"
-                href={buildWhatsAppUrl(KIMM_WHATSAPP_MESSAGES.promotion)}
+                href={buildWhatsAppUrl(buildPromotionWhatsAppMessage(projectProfile))}
                 target="_blank"
                 rel="noreferrer"
               >
@@ -343,9 +363,12 @@ function App() {
                       ))}
                     </ul>
 
-                    <a href={buildWhatsAppUrl(KIMM_WHATSAPP_MESSAGES.quote)}>
-                      Consultar solución <ArrowRight size={16} />
-                    </a>
+                    <SmartWhatsAppButton
+  profile={projectProfile}
+  className="text-link"
+>
+  Consultar solución <ArrowRight size={16} />
+</SmartWhatsAppButton>
                   </div>
                 </article>
               ))}
@@ -378,9 +401,12 @@ function App() {
                   <div className="project-overlay">
                     <span>{project.category}</span>
                     <h3>{project.title}</h3>
-                    <a href={buildWhatsAppUrl(KIMM_WHATSAPP_MESSAGES.quote)}>
-                      Quiero algo similar <ArrowRight size={16} />
-                    </a>
+                    <SmartWhatsAppButton
+  profile={projectProfile}
+  className="text-link"
+>
+  Quiero algo similar <ArrowRight size={16} />
+</SmartWhatsAppButton>
                   </div>
                 </article>
               ))}
@@ -399,9 +425,12 @@ function App() {
                 instalación y transformación.
               </p>
 
-              <a className="text-link" href={buildWhatsAppUrl(KIMM_WHATSAPP_MESSAGES.quote)}>
-                Preguntar por un proyecto <ArrowRight size={17} />
-              </a>
+              <SmartWhatsAppButton
+  profile={projectProfile}
+  className="text-link"
+>
+  Preguntar por un proyecto <ArrowRight size={17} />
+</SmartWhatsAppButton>
             </div>
 
             <div className="video-card">
@@ -568,8 +597,47 @@ function App() {
                   name="message"
                   rows={5}
                   placeholder="Describe brevemente tu proyecto..."
+                  value={projectDescription}
+                  onChange={(event) => setProjectDescription(event.target.value)}
                   required
                 />
+                {projectDescription.trim() && (                  <div className="smart-quote-detected">
+                    <div className="smart-quote-detected-head">
+                      <span>ANALISIS KIMM</span>
+                      <strong>{projectProfile.label}</strong>
+                    </div>
+
+                    <div className="smart-quote-data">
+                      <span>
+                        <small>Contexto</small>
+                        {projectProfile.contextLabel}
+                      </span>
+
+                      <span>
+                        <small>Cantidad</small>
+                        {projectProfile.quantity !== null
+                          ? projectProfile.quantity
+                          : "Por definir"}
+                      </span>
+
+                      <span>
+                        <small>Medidas</small>
+                        {projectProfile.dimensions ?? "Por definir"}
+                      </span>
+
+                      <span>
+                        <small>Urgencia</small>
+                        {projectProfile.urgencyLabel}
+                      </span>
+                    </div>
+
+                    <p>
+                      {projectProfile.hasMeasurements
+                        ? "Tenemos medidas para preparar mejor la solicitud."
+                        : "Puedes agregar medidas aproximadas para mejorar la cotizacion."}
+                    </p>
+                  </div>
+                )}
               </label>
 
               <button
@@ -608,9 +676,12 @@ function App() {
               solución.
             </p>
 
-            <a className="button button-primary" href={buildWhatsAppUrl(KIMM_WHATSAPP_MESSAGES.quote)}>
-              Solicitar cotización <MessageCircle size={18} />
-            </a>
+            <SmartWhatsAppButton
+              profile={projectProfile}
+              className="button button-primary"
+            >
+              Solicitar cotización
+            </SmartWhatsAppButton>
           </div>
         </section>
       </main>
@@ -640,13 +711,23 @@ function App() {
             <span className="footer-title">Navegación</span>
             <a href="#referencias">Referencias</a>
             <a href="#proceso">Proceso</a>
-            <a href={buildWhatsAppUrl(KIMM_WHATSAPP_MESSAGES.quote)}>Cotizar</a>
+            <SmartWhatsAppButton
+  profile={projectProfile}
+  className="footer-smart-link"
+>
+  Cotizar
+</SmartWhatsAppButton>
           </div>
 
           <div>
             <span className="footer-title">Contacto</span>
             <span>Medellín & Área Metropolitana</span>
-            <a href={buildWhatsAppUrl(KIMM_WHATSAPP_MESSAGES.quote)}>Solicitar cotización</a>
+            <SmartWhatsAppButton
+  profile={projectProfile}
+  className="footer-smart-link"
+>
+  Solicitar cotización
+</SmartWhatsAppButton>
           </div>
         </div>
 
@@ -655,6 +736,7 @@ function App() {
           <span>Diseño · Precisión · Arquitectura</span>
         </div>
       </footer>
+      <SmartQuote projectDescription={projectDescription} />
     </div>
   );
 }

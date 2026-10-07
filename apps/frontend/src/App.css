@@ -1520,3 +1520,379 @@ a {
     font-size: 32px;
   }
 }
+
+/* =========================================================
+   KIMM SMART QUOTE — PROFESSIONAL UI
+   ========================================================= */
+
+.smart-quote {
+  position: fixed;
+  right: 24px;
+  bottom: 94px;
+  z-index: 990;
+  font-family: inherit;
+}
+
+.smart-quote-panel {
+  position: relative;
+  width: 300px;
+  padding: 22px;
+  overflow: hidden;
+  border: 1px solid rgba(99, 224, 255, 0.24);
+  border-radius: 20px;
+  background:
+    linear-gradient(145deg, rgba(11, 24, 32, 0.98), rgba(7, 15, 21, 0.98));
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.32),
+    0 0 0 1px rgba(255, 255, 255, 0.035) inset,
+    0 0 34px rgba(53, 210, 246, 0.08);
+  color: #f5f8fa;
+  animation: smartQuoteIn 0.42s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.smart-quote-panel::before {
+  content: "";
+  position: absolute;
+  top: -90px;
+  right: -70px;
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  background: rgba(55, 213, 247, 0.1);
+  filter: blur(18px);
+  pointer-events: none;
+}
+
+.smart-quote-panel::after {
+  content: "";
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(91, 224, 255, 0.8),
+    transparent
+  );
+}
+
+.smart-quote-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.045);
+  color: #aab8c0;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.smart-quote-close:hover {
+  transform: rotate(90deg);
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.smart-quote-badge {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 15px;
+  color: #67ddff;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+}
+
+.smart-quote-badge svg {
+  filter: drop-shadow(0 0 7px rgba(103, 221, 255, 0.5));
+}
+
+.smart-quote-panel h3 {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  color: #ffffff;
+  font-size: 27px;
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  font-weight: 800;
+}
+
+.smart-quote-description {
+  position: relative;
+  z-index: 1;
+  margin: 14px 0 17px;
+  color: #aebcc4;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.smart-quote-detected {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+  padding: 10px 12px;
+  border: 1px solid rgba(103, 221, 255, 0.16);
+  border-radius: 10px;
+  background: rgba(103, 221, 255, 0.055);
+}
+
+.smart-quote-detected span {
+  color: #71838c;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.smart-quote-detected strong {
+  color: #70e1ff;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.smart-quote-button {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  width: 100%;
+  min-height: 46px;
+  box-sizing: border-box;
+  border: 1px solid rgba(102, 230, 174, 0.35);
+  border-radius: 11px;
+  background: linear-gradient(135deg, #168c58, #20a96a);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 800;
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  box-shadow: 0 10px 25px rgba(18, 156, 91, 0.18);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
+}
+
+.smart-quote-button:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+  box-shadow: 0 15px 32px rgba(18, 156, 91, 0.28);
+}
+
+.smart-quote-panel small {
+  position: relative;
+  z-index: 1;
+  display: block;
+  margin-top: 10px;
+  color: #61727b;
+  font-size: 9px;
+  text-align: center;
+}
+
+.smart-quote-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 0 15px;
+  border: 1px solid rgba(103, 221, 255, 0.3);
+  border-radius: 999px;
+  background: rgba(8, 18, 25, 0.94);
+  color: #70e1ff;
+  box-shadow:
+    0 12px 35px rgba(0, 0, 0, 0.25),
+    0 0 20px rgba(60, 214, 247, 0.08);
+  backdrop-filter: blur(14px);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.smart-quote-trigger:hover {
+  transform: translateY(-2px);
+  border-color: rgba(103, 221, 255, 0.62);
+  box-shadow:
+    0 16px 38px rgba(0, 0, 0, 0.3),
+    0 0 28px rgba(60, 214, 247, 0.14);
+}
+
+.smart-quote-trigger svg {
+  filter: drop-shadow(0 0 6px rgba(103, 221, 255, 0.55));
+}
+
+.smart-quote-reopen {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: 1px solid rgba(103, 221, 255, 0.3);
+  border-radius: 50%;
+  background: rgba(8, 18, 25, 0.95);
+  color: #70e1ff;
+  box-shadow:
+    0 12px 35px rgba(0, 0, 0, 0.25),
+    0 0 20px rgba(60, 214, 247, 0.08);
+  backdrop-filter: blur(14px);
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.smart-quote-reopen:hover {
+  transform: translateY(-3px) rotate(8deg);
+  border-color: rgba(103, 221, 255, 0.62);
+}
+
+@keyframes smartQuoteIn {
+  from {
+    opacity: 0;
+    transform: translateX(28px) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@media (max-width: 950px) {
+  .smart-quote {
+    right: 18px;
+    bottom: 88px;
+  }
+
+  .smart-quote-panel {
+    width: 280px;
+  }
+}
+
+@media (max-width: 640px) {
+  .smart-quote {
+    right: 16px;
+    bottom: 82px;
+  }
+
+  .smart-quote-panel {
+    width: min(300px, calc(100vw - 32px));
+    padding: 20px;
+  }
+
+  .smart-quote-trigger {
+    min-height: 40px;
+    padding: 0 13px;
+  }
+
+  .smart-quote-panel h3 {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 400px) {
+  .smart-quote {
+    right: 12px;
+    bottom: 78px;
+  }
+
+  .smart-quote-panel {
+    width: calc(100vw - 24px);
+    padding: 18px;
+    border-radius: 16px;
+  }
+
+  .smart-quote-panel h3 {
+    font-size: 22px;
+  }
+
+  .smart-quote-description {
+    font-size: 11px;
+  }
+}
+.smart-quote-detected > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.smart-quote-detected p {
+  margin: 6px 0 0;
+  color: #8fa1aa;
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+.smart-quote-detected-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.smart-quote-detected-head span {
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  color: #8fa1aa;
+}
+
+.smart-quote-detected-head strong {
+  color: #dffcff;
+  font-size: 12px;
+}
+
+.smart-quote-data {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.smart-quote-data span {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 8px;
+  border: 1px solid rgba(126, 220, 232, 0.12);
+  background: rgba(255, 255, 255, 0.025);
+  color: #d9e4e8;
+  font-size: 10px;
+}
+
+.smart-quote-data small {
+  color: #71838d;
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+@media (max-width: 400px) {
+  .smart-quote-data {
+    grid-template-columns: 1fr;
+  }
+}
