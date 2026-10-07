@@ -20,7 +20,7 @@ services:
           property: connectionString
 
   - type: web
-    name: kimm-frontend
+    name: vidrios-aluminios-kimm
     runtime: static
     plan: free
     rootDir: .

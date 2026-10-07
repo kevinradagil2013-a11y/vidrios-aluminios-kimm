@@ -144,7 +144,11 @@ function App() {
       <header className="header">
         <div className="container header-inner">
           <a className="brand" href="#inicio">
-            <span className="brand-mark">K</span>
+            <img
+              className="brand-logo"
+              src="/kimm-logo.svg"
+              alt="Vidrios y Aluminios KIMM"
+            />
             <span>
               <strong>KIMM</strong>
               <small>VIDRIOS & ALUMINIOS</small>
@@ -544,7 +548,11 @@ function App() {
         <div className="container footer-grid">
           <div>
             <a className="brand footer-brand" href="#inicio">
-              <span className="brand-mark">K</span>
+              <img
+              className="brand-logo"
+              src="/kimm-logo.svg"
+              alt="Vidrios y Aluminios KIMM"
+            />
 
               <span>
                 <strong>KIMM</strong>
@@ -572,7 +580,7 @@ function App() {
         </div>
 
         <div className="container footer-bottom">
-          <span>Ã‚© 2026 Vidrios y Aluminios KIMM</span>
+          <span>© 2026 Vidrios y Aluminios KIMM</span>
           <span>Diseño · Precisión · Arquitectura</span>
         </div>
       </footer>
