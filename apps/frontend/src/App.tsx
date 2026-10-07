@@ -235,7 +235,7 @@ function App() {
           </div>
         </section>
 
-        <section className="section references" id="referencias">
+        <section className="section references">
           <div className="container">
             <div className="section-heading">
               <div>
@@ -278,7 +278,7 @@ function App() {
           </div>
         </section>
 
-        <section className="section dark-section" id="proyectos">
+        <section className="section dark-section" id="referencias">
           <div className="container">
             <div className="section-heading dark-heading">
               <div>
