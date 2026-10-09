@@ -25,13 +25,13 @@ const serviceSlides = [
   },
   {
     title: "Deja entrar la luz",
-    description: "Ventanas y puertas que conectan tus espacios y aprovechan la luz natural.",
+    description: "Ventanas y puertas que integran tus espacios, aprovechan la luz natural y aportan una estética limpia.",
     category: "VENTANAS Y PUERTAS",
     image: KIMM_IMAGES.aluminum,
   },
   {
-    title: "Dale amplitud a tus espacios",
-    description: "Espejos decorativos que reflejan luz y aportan carácter a cada ambiente.",
+    title: "Más luz, amplitud y estilo para tu espacio",
+    description: "Espejos decorativos que reflejan la luz y suman personalidad a cada ambiente.",
     category: "ESPEJOS DECORATIVOS",
     image: KIMM_IMAGES.glass,
   },
@@ -295,7 +295,7 @@ function App() {
             <div className="gallery-heading">
               <div>
                 <span className="eyebrow">ESPACIOS CON ESTILO</span>
-                <h2>Inspiración para tu próximo proyecto</h2>
+                <h2>Ideas que pueden transformar tu espacio</h2>
                 <p>
                   Explora ideas en vidrio, aluminio y diseño interior.
                   Cuéntanos qué tienes en mente y te orientamos.
@@ -364,9 +364,9 @@ function App() {
             </div>
 
             <div className="gallery-footer">
-              <p>¿Tienes una idea diferente? La convertimos en un plan de trabajo.</p>
+              <p>¿Tienes una idea en mente? Hablemos de cómo llevarla a tu espacio.</p>
               <a className="button button-primary" href="#cotizar">
-                Cuéntanos tu proyecto <ArrowRight size={17} />
+                Hablemos de tu proyecto <ArrowRight size={17} />
               </a>
             </div>
           </div>
@@ -679,7 +679,7 @@ function App() {
                 <small>VIDRIOS & ALUMINIOS</small>
               </span>
             </a>
-            <p>Soluciones en vidrio y aluminio para tu espacio.</p>
+            <p>Diseño y soluciones en vidrio y aluminio para tus espacios.</p>
           </div>
 
           <div className="footer-compact-contact">
