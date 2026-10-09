@@ -3,7 +3,7 @@ import type { ProjectProfile } from "./project-intelligence";
 const contextText = {
   residential: "para vivienda",
   commercial: "para un proyecto comercial",
-  architectural: "para un proyecto arquitectonico",
+  architectural: "para un proyecto arquitectónico",
   unknown: "",
 } as const;
 
@@ -11,7 +11,7 @@ export function buildProjectWhatsAppMessage(
   profile: ProjectProfile,
 ): string {
   const parts: string[] = [
-    "Hola KIMM, quiero recibir asesoria y cotizar un proyecto.",
+    "Hola, equipo KIMM. 👋 Quiero recibir asesoría y cotizar mi proyecto.",
     `Estoy interesado en: ${profile.label}.`,
   ];
 
@@ -32,10 +32,12 @@ export function buildProjectWhatsAppMessage(
   }
 
   if (profile.asksPrice) {
-    parts.push("Quiero conocer opciones, precio y disponibilidad.");
+    parts.push("Me gustaría conocer precios y disponibilidad.");
   } else {
-    parts.push("Quisiera conocer opciones, acabados y cotizacion.");
+    parts.push("Quisiera conocer opciones, acabados y precios.");
   }
+
+  parts.push("¿Me pueden orientar con los siguientes pasos?");
 
   return parts.join(" ");
 }
@@ -59,8 +61,8 @@ export function buildPromotionWhatsAppMessage(
       : `, aproximadamente ${profile.quantity} unidades`;
 
   return (
-    "Hola KIMM, vi la promocion del 10% de descuento + reposa toallas " +
-    `de regalo y quiero consultar si aplica para ${projectName}${contextText}${quantityText}. ` +
-    "Me gustaria recibir asesoria y conocer las condiciones."
+    "Hola, equipo KIMM. 👋 Vi la promoción del 10% de descuento y el reposa toallas de regalo. " +
+    `Quiero consultar si aplica para ${projectName}${contextText}${quantityText}. ` +
+    "¿Me pueden explicar las condiciones y ayudarme a cotizar?"
   );
 }
