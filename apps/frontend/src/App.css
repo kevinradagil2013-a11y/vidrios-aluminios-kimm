@@ -1896,3 +1896,490 @@ a {
     grid-template-columns: 1fr;
   }
 }
+/* KIMM AUTO CAROUSEL REDESIGN */
+.hero-carousel {
+  position: relative;
+  min-height: min(760px, 100svh);
+  height: min(760px, 100svh);
+  background: #080b0f;
+  isolation: isolate;
+}
+
+.hero-carousel .hero-slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 800ms ease, visibility 800ms ease;
+}
+
+.hero-carousel .hero-slide.is-active {
+  opacity: 1;
+  visibility: visible;
+  z-index: 1;
+}
+
+.hero-slide-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.025);
+  transition: transform 6s ease;
+}
+
+.hero-slide.is-active .hero-slide-image {
+  transform: scale(1);
+}
+
+.hero-slide-shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(4, 9, 14, .88), rgba(4, 9, 14, .55) 52%, rgba(4, 9, 14, .12)),
+    linear-gradient(0deg, rgba(4, 9, 14, .48), transparent 55%);
+}
+
+.hero-carousel .hero-content {
+  width: min(calc(100% - 48px), var(--container));
+  padding-top: 100px;
+  padding-bottom: 85px;
+}
+
+.hero-carousel .hero-copy {
+  max-width: 680px;
+}
+
+.hero-carousel .hero-copy h1 {
+  max-width: 680px;
+  font-size: clamp(48px, 6.3vw, 82px);
+  line-height: .98;
+  letter-spacing: -.055em;
+  text-wrap: balance;
+}
+
+.hero-carousel .hero-copy p {
+  max-width: 510px;
+  font-size: clamp(14px, 1.5vw, 17px);
+}
+
+.hero-carousel-controls {
+  position: absolute;
+  z-index: 5;
+  right: max(24px, calc((100vw - var(--container)) / 2));
+  bottom: 32px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: rgba(255,255,255,.75);
+  font-size: 10px;
+  letter-spacing: .12em;
+}
+
+.hero-dot {
+  width: 24px;
+  height: 4px;
+  padding: 0;
+  border: 0;
+  background: rgba(255,255,255,.35);
+  cursor: pointer;
+  transition: width .25s ease, background .25s ease;
+}
+
+.hero-dot.is-active {
+  width: 42px;
+  background: #8fd3ff;
+}
+
+.hero-carousel-controls span {
+  margin-left: 7px;
+}
+
+.promo-exotic-inner {
+  padding-top: 18px;
+  padding-bottom: 18px;
+}
+
+.promo-offer {
+  padding: 20px 24px;
+}
+
+.promo-discount {
+  margin: 10px 0 6px;
+}
+
+.promo-discount span {
+  font-size: clamp(48px, 5vw, 66px);
+}
+
+.promo-description {
+  margin: 8px 0;
+  font-size: 12px;
+}
+
+.promo-button {
+  margin-top: 12px;
+}
+
+.promo-gift-card {
+  min-height: 220px;
+}
+
+.promo-gift-copy {
+  padding: 20px;
+}
+
+.promo-gift-copy h3 {
+  font-size: clamp(24px, 2.4vw, 34px);
+}
+
+.promo-gift-image,
+.promo-gift-image img {
+  min-height: 220px;
+}
+
+/* Conservamos el formulario y su lógica, con menos espacio vertical. */
+.quote-section {
+  padding: 54px 0;
+}
+
+.quote-grid {
+  gap: 40px;
+}
+
+.quote-intro h2 {
+  font-size: clamp(38px, 4vw, 54px);
+}
+
+.quote-form {
+  padding: 28px;
+}
+
+.quote-form textarea {
+  min-height: 85px;
+}
+
+@media (max-width: 950px) {
+  .hero-carousel {
+    min-height: 690px;
+    height: 85svh;
+  }
+
+  .hero-carousel .hero-content {
+    padding-top: 110px;
+  }
+
+  .promo-gift-card {
+    min-height: 220px;
+  }
+}
+
+@media (max-width: 650px) {
+  .hero-carousel {
+    min-height: 680px;
+    height: 88svh;
+    max-height: 780px;
+  }
+
+  .hero-carousel .hero-content {
+    width: calc(100% - 36px);
+    padding-top: 90px;
+    padding-bottom: 100px;
+  }
+
+  .hero-carousel .hero-copy h1 {
+    margin-top: 20px;
+    font-size: clamp(42px, 11vw, 58px);
+  }
+
+  .hero-carousel .hero-copy p {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .hero-carousel .hero-actions {
+    align-items: stretch;
+    flex-direction: column;
+    max-width: 310px;
+    margin-top: 24px;
+  }
+
+  .hero-carousel .hero-actions .button {
+    width: 100%;
+    min-height: 48px;
+    padding: 0 12px;
+    font-size: 10px;
+  }
+
+  .hero-carousel-controls {
+    right: 18px;
+    bottom: 22px;
+    left: 18px;
+    justify-content: flex-start;
+  }
+
+  .promo-exotic-inner {
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+
+  .promo-offer {
+    padding: 22px 18px;
+  }
+
+  .promo-gift-card {
+    grid-template-columns: 1fr;
+  }
+
+  .quote-section {
+    padding: 42px 0;
+  }
+
+  .quote-form {
+    padding: 22px 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-carousel .hero-slide,
+  .hero-slide-image,
+  .hero-dot {
+    transition: none !important;
+  }
+}
+
+/* KIMM COMPACT HOME */
+.footer .footer-grid {
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: 24px;
+  padding-top: 28px;
+  padding-bottom: 22px;
+}
+
+.footer-compact-brand p {
+  max-width: 340px;
+  margin: 10px 0 0;
+}
+
+.footer-compact-contact {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.footer .footer-bottom {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+@media (max-width: 640px) {
+  .footer .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .footer-compact-contact {
+    gap: 8px;
+  }
+}
+
+
+/* KIMM CINEMATIC HERO V2 */
+.hero.hero-carousel {
+  position: relative;
+  isolation: isolate;
+  background: #081017;
+  color: #fff;
+}
+
+.hero.hero-carousel .hero-slide-shade {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(5, 13, 24, .91) 0%,
+      rgba(5, 13, 24, .74) 36%,
+      rgba(5, 13, 24, .30) 70%,
+      rgba(5, 13, 24, .12) 100%
+    ),
+    linear-gradient(
+      0deg,
+      rgba(5, 13, 24, .48) 0%,
+      transparent 48%,
+      rgba(5, 13, 24, .12) 100%
+    );
+}
+
+.hero.hero-carousel .hero-content {
+  position: relative;
+  z-index: 2;
+  padding-top: clamp(72px, 10vh, 128px);
+  padding-bottom: clamp(100px, 13vh, 150px);
+}
+
+.hero.hero-carousel .hero-copy {
+  width: min(100%, 760px);
+}
+
+.hero.hero-carousel .eyebrow.light {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 22px;
+  color: #e3c894;
+  font-size: .76rem;
+  font-weight: 700;
+  letter-spacing: .17em;
+  line-height: 1.8;
+  text-transform: uppercase;
+}
+
+.hero.hero-carousel .hero-copy h1 {
+  max-width: 760px;
+  margin-top: 0;
+  margin-bottom: 22px;
+  color: #fff;
+  font-size: clamp(2.7rem, 5.5vw, 5.4rem);
+  font-weight: 650;
+  line-height: 1.02;
+  letter-spacing: -.052em;
+  text-wrap: balance;
+  text-shadow: 0 3px 24px rgba(0, 0, 0, .22);
+}
+
+.hero.hero-carousel .hero-copy p {
+  max-width: 590px;
+  color: rgba(255, 255, 255, .86);
+  font-size: clamp(1rem, 1.4vw, 1.16rem);
+  line-height: 1.85;
+  text-wrap: pretty;
+}
+
+.hero.hero-carousel .hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin-top: 30px;
+}
+
+.hero.hero-carousel .hero-actions .button {
+  min-height: 52px;
+  border-radius: 999px;
+  padding: 14px 23px;
+  font-weight: 650;
+  letter-spacing: .005em;
+}
+
+.hero.hero-carousel .hero-actions .button-primary {
+  color: #101d32;
+  background: linear-gradient(135deg, #f0d9a8, #d7b779);
+  border: 1px solid rgba(255, 255, 255, .25);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .22);
+}
+
+.hero.hero-carousel .hero-actions .button-primary:hover {
+  background: #f7e6c4;
+  box-shadow: 0 14px 36px rgba(0, 0, 0, .3);
+  transform: translateY(-3px);
+}
+
+.hero.hero-carousel .hero-actions .button-ghost {
+  color: #fff;
+  background: rgba(255, 255, 255, .07);
+  border: 1px solid rgba(255, 255, 255, .48);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.hero.hero-carousel .hero-actions .button-ghost:hover {
+  background: rgba(255, 255, 255, .15);
+  border-color: rgba(255, 255, 255, .8);
+}
+
+/* Controles discretos, pero visibles sobre la fotografía */
+.hero.hero-carousel .hero-carousel-controls {
+  z-index: 4;
+  gap: 11px;
+}
+
+.hero.hero-carousel .hero-carousel-controls > span {
+  color: rgba(255, 255, 255, .82);
+  font-size: .78rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .12em;
+}
+
+.hero.hero-carousel .hero-dot {
+  width: 9px;
+  height: 9px;
+  border: 1px solid rgba(255, 255, 255, .8);
+  border-radius: 50px;
+  background: rgba(255, 255, 255, .32);
+}
+
+.hero.hero-carousel .hero-dot.is-active {
+  width: 28px;
+  background: #e3c894;
+  border-color: #e3c894;
+}
+
+/* Ajustes de lectura y espacio en teléfonos */
+@media (max-width: 640px) {
+  .hero.hero-carousel .hero-slide-shade {
+    background:
+      linear-gradient(
+        90deg,
+        rgba(5, 13, 24, .82),
+        rgba(5, 13, 24, .48)
+      ),
+      linear-gradient(
+        0deg,
+        rgba(5, 13, 24, .68),
+        transparent 80%
+      );
+  }
+
+  .hero.hero-carousel .hero-content {
+    padding-top: 76px;
+    padding-bottom: 118px;
+  }
+
+  .hero.hero-carousel .eyebrow.light {
+    margin-bottom: 16px;
+    font-size: .68rem;
+    letter-spacing: .11em;
+  }
+
+  .hero.hero-carousel .hero-copy h1 {
+    font-size: clamp(2.35rem, 11vw, 3.8rem);
+    line-height: 1.04;
+  }
+
+  .hero.hero-carousel .hero-copy p {
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .hero.hero-carousel .hero-actions {
+    align-items: stretch;
+    gap: 11px;
+    margin-top: 24px;
+  }
+
+  .hero.hero-carousel .hero-actions .button {
+    min-height: 49px;
+    padding: 12px 17px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero.hero-carousel .hero-actions .button {
+    transition: none;
+  }
+}

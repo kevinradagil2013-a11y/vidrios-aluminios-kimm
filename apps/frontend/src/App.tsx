@@ -9,84 +9,59 @@ import { useEffect, useState } from "react";
 import type { FormEvent } from "react";
 import {
   ArrowRight,
-  Check,
   ChevronRight,
-  MessageCircle,
-  Ruler,
   Send,
   ShieldCheck,
   Sparkles,
-  Wrench,
 } from "lucide-react";
 import "./App.css";
 
-const references = [
+const serviceSlides = [
   {
-    title: "Vidrios",
-    subtitle: "Soluciones que aportan luz, amplitud y diseño.",
-    items: ["Vidrio templado", "Vidrio laminado", "Espejos", "Divisiones"],
-    image:
-      KIMM_IMAGES.glass,
+    title: "Transforma tu baño",
+    description: "Diseño moderno, transparencia y acabados para un espacio más elegante y funcional.",
+    category: "DIVISIONES DE BAÑO",
+    image: KIMM_IMAGES.projectBathroom,
   },
   {
-    title: "Aluminios",
-    subtitle: "Sistemas pensados para durar y transformar espacios.",
-    items: ["Ventanas", "Puertas", "Divisiones", "Soluciones arquitectónicas"],
-    image:
-      KIMM_IMAGES.aluminum,
-  },
-];
-
-const projects = [
-  {
-    category: "Residencial",
-    title: "Espacios que respiran amplitud",
-    image:
-      KIMM_IMAGES.projectResidential,
+    title: "Deja entrar la luz",
+    description: "Ventanas y puertas que conectan tus espacios y aprovechan la luz natural.",
+    category: "VENTANAS Y PUERTAS",
+    image: KIMM_IMAGES.aluminum,
   },
   {
-    category: "Baños",
-    title: "Divisiones con acabado limpio",
-    image:
-      KIMM_IMAGES.projectBathroom,
+    title: "Dale amplitud a tus espacios",
+    description: "Espejos decorativos que reflejan luz y aportan carácter a cada ambiente.",
+    category: "ESPEJOS DECORATIVOS",
+    image: KIMM_IMAGES.glass,
   },
   {
-    category: "Arquitectura",
-    title: "Diseño que conecta interior y exterior",
-    image:
-      KIMM_IMAGES.projectArchitecture,
+    title: "Una fachada que destaca",
+    description: "Soluciones de vidrio y aluminio para una imagen arquitectónica contemporánea.",
+    category: "FACHADAS Y CERRAMIENTOS",
+    image: KIMM_IMAGES.projectArchitecture,
+  },
+  {
+    title: "Diseño en cada detalle",
+    description: "Cuéntanos tu idea y recibe orientación para encontrar una solución a tu medida.",
+    category: "ASESORÍA Y COTIZACIÓN",
+    image: KIMM_IMAGES.projectResidential,
   },
 ];
-
-const process = [
-  {
-    number: "01",
-    icon: MessageCircle,
-    title: "Cuéntanos tu proyecto",
-    text: "Háblanos de lo que necesitas y nuestro equipo te orientará.",
-  },
-  {
-    number: "02",
-    icon: Ruler,
-    title: "Medimos",
-    text: "Revisamos el espacio y tomamos las medidas necesarias.",
-  },
-  {
-    number: "03",
-    icon: Wrench,
-    title: "Fabricamos",
-    text: "Preparamos cada solución con precisión y cuidado.",
-  },
-  {
-    number: "04",
-    icon: Check,
-    title: "Instalamos",
-    text: "Llevamos el proyecto a su resultado final.",
-  },
-];
-
 function App() {
+  const [activeSlide, setActiveSlide] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reducedMotion) return;
+
+    const timer = window.setInterval(() => {
+      setActiveSlide((current) => (current + 1) % serviceSlides.length);
+    }, 5000);
+
+    return () => window.clearInterval(timer);
+  }, []);
   const [submitMessage, setSubmitMessage] = useState("");
   const [projectDescription, setProjectDescription] = useState(() => loadProjectSession()?.description ?? "");
 
@@ -170,9 +145,8 @@ function App() {
           </a>
 
           <nav className="nav">
-            <a href="#referencias">Referencias</a>
-            <a href="#proceso">Cómo trabajamos</a>
-            <a href="#nosotros">Nosotros</a>
+            <a href="#inicio">Inicio</a>
+            <a href="#cotizar">Cotizar</a>
           </nav>
 
           <SmartWhatsAppButton
@@ -185,59 +159,52 @@ function App() {
       </header>
 
       <main>
-        <section className="hero" id="inicio">
-          <div className="hero-image" />
-          <div className="hero-overlay" />
-
-          <div className="container hero-content">
-            <div className="hero-copy">
-              <span className="eyebrow light">
-                VIDRIOS & ALUMINIOS · MEDELLÍN
-              </span>
-
-              <h1>
-                Diseño que
-                <br />
-                transforma
-                <br />
-                <em>espacios.</em>
-              </h1>
-
-              <p>
-                Soluciones en vidrio y aluminio para hogares, baños,
-                oficinas y proyectos arquitectónicos.
-              </p>
-
-              <div className="hero-actions">
-                <SmartWhatsAppButton
-  profile={projectProfile}
-  className="button button-primary"
->
-  Solicitar cotización <ArrowRight size={18} />
-</SmartWhatsAppButton>
-
-                <a className="button button-ghost" href="#referencias">
-                  Ver proyectos <ChevronRight size={18} />
-                </a>
-              </div>
-            </div>
-
-            <div className="hero-proof">
-              <div>
-                <strong>01</strong>
-                <span>Asesoría personalizada</span>
-              </div>
-              <div>
-                <strong>02</strong>
-                <span>Fabricación a medida</span>
-              </div>
-              <div>
-                <strong>03</strong>
-                <span>Instalación profesional</span>
-              </div>
-            </div>
+        <section className="hero hero-carousel" id="inicio" aria-label="Servicios KIMM">
+  {serviceSlides.map((slide, index) => (
+    <div
+      key={slide.category}
+      className={`hero-slide ${index === activeSlide ? "is-active" : ""}`}
+      aria-hidden={index !== activeSlide}
+    >
+      <img className="hero-slide-image" src={slide.image} alt="" />
+      <div className="hero-slide-shade" />
+      <div className="container hero-content">
+        <div className="hero-copy">
+          <span className="eyebrow light">
+            {slide.category} · MEDELLÍN Y ÁREA METROPOLITANA
+          </span>
+          <h1>{slide.title}</h1>
+          <p>{slide.description}</p>
+          <div className="hero-actions">
+            <SmartWhatsAppButton
+              profile={projectProfile}
+              className="button button-primary"
+            >
+              Cotizar por WhatsApp <ArrowRight size={18} />
+            </SmartWhatsAppButton>
+            <a className="button button-ghost" href="#cotizar">
+              Solicitar asesoría <ChevronRight size={18} />
+            </a>
           </div>
-        </section>
+        </div>
+      </div>
+    </div>
+  ))}
+
+  <div className="hero-carousel-controls" aria-label="Elegir servicio">
+    {serviceSlides.map((slide, index) => (
+      <button
+        key={slide.category}
+        type="button"
+        className={`hero-dot ${index === activeSlide ? "is-active" : ""}`}
+        aria-label={`Ver ${slide.category.toLowerCase()}`}
+        aria-current={index === activeSlide ? "true" : undefined}
+        onClick={() => setActiveSlide(index)}
+      />
+    ))}
+    <span>{String(activeSlide + 1).padStart(2, "0")} / 05</span>
+  </div>
+</section>
 
                 <section className="promo promo-exotic">
           <div className="container promo-exotic-inner">
@@ -330,192 +297,15 @@ function App() {
           </div>
         </section>
 
-        <section className="section references">
-          <div className="container">
-            <div className="section-heading">
-              <div>
-                <span className="eyebrow">NUESTRAS SOLUCIONES</span>
-                <h2>Materiales que se convierten en espacios.</h2>
-              </div>
 
-              <p>
-                Explora algunas de las soluciones que podemos llevar a tu
-                proyecto con diseño, precisión y funcionalidad.
-              </p>
-            </div>
 
-            <div className="reference-grid">
-              {references.map((reference) => (
-                <article className="reference-card" key={reference.title}>
-                  <img src={reference.image} alt={reference.title} />
 
-                  <div className="reference-content">
-                    <span className="card-kicker">KIMM / {reference.title}</span>
-                    <h3>{reference.title}</h3>
-                    <p>{reference.subtitle}</p>
 
-                    <ul>
-                      {reference.items.map((item) => (
-                        <li key={item}>
-                          <Check size={15} />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
 
-                    <SmartWhatsAppButton
-  profile={projectProfile}
-  className="text-link"
->
-  Consultar solución <ArrowRight size={16} />
-</SmartWhatsAppButton>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
 
-        <section className="section dark-section" id="referencias">
-          <div className="container">
-            <div className="section-heading dark-heading">
-              <div>
-                <span className="eyebrow light">REFERENCIAS</span>
-                <h2>Ideas que ya tomaron forma.</h2>
-              </div>
 
-              <p>
-                Una referencia visual del tipo de espacios que podemos
-                transformar.
-              </p>
-            </div>
 
-            <div className="project-grid">
-              {projects.map((project, index) => (
-                <article
-                  className={`project-card project-${index + 1}`}
-                  key={project.title}
-                >
-                  <img src={project.image} alt={project.title} />
 
-                  <div className="project-overlay">
-                    <span>{project.category}</span>
-                    <h3>{project.title}</h3>
-                    <SmartWhatsAppButton
-  profile={projectProfile}
-  className="text-link"
->
-  Quiero algo similar <ArrowRight size={16} />
-</SmartWhatsAppButton>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="section action-section">
-          <div className="container action-grid">
-            <div className="action-copy">
-              <span className="eyebrow">KIMM EN ACCIÓN</span>
-              <h2>Del espacio real al resultado final.</h2>
-
-              <p>
-                Queremos mostrarte cómo trabajamos: medición, fabricación,
-                instalación y transformación.
-              </p>
-
-              <SmartWhatsAppButton
-  profile={projectProfile}
-  className="text-link"
->
-  Preguntar por un proyecto <ArrowRight size={17} />
-</SmartWhatsAppButton>
-            </div>
-
-            <div className="video-card">
-                <img
-                  src={KIMM_IMAGES.process}
-                  alt="Referencia visual de arquitectura y acabados"
-                />
-
-                <div className="video-shade" />
-
-                <div className="video-label">
-                  <span>KIMM EN ACCIÓN</span>
-                  <strong>Así trabajamos</strong>
-                  <small>Medición · Fabricación · Instalación · Resultado</small>
-                </div>
-              </div>
-            </div>
-          </section>
-
-        <section className="section process-section" id="proceso">
-          <div className="container">
-            <div className="section-heading">
-              <div>
-                <span className="eyebrow">NUESTRO PROCESO</span>
-                <h2>Simple para ti. Preciso para nosotros.</h2>
-              </div>
-
-              <p>
-                Nos encargamos del proceso para que tú puedas concentrarte
-                en disfrutar el resultado.
-              </p>
-            </div>
-
-            <div className="process-grid">
-              {process.map((item) => {
-                const Icon = item.icon;
-
-                return (
-                  <article className="process-card" key={item.number}>
-                    <span className="process-number">{item.number}</span>
-                    <Icon size={24} strokeWidth={1.6} />
-                    <h3>{item.title}</h3>
-                    <p>{item.text}</p>
-                  </article>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
-        <section className="trust-section" id="nosotros">
-          <div className="container trust-grid">
-            <div>
-              <span className="eyebrow">KIMM</span>
-              <h2>
-                Una solución bien hecha comienza escuchando tu proyecto.
-              </h2>
-            </div>
-
-            <div className="trust-content">
-              <p>
-                Somos una empresa enfocada en soluciones de vidrio y aluminio
-                para espacios donde el diseño, la funcionalidad y el acabado
-                importan.
-              </p>
-
-              <div className="trust-points">
-                <span>
-                  <ShieldCheck size={18} />
-                  Atención personalizada
-                </span>
-
-                <span>
-                  <ShieldCheck size={18} />
-                  Soluciones a medida
-                </span>
-
-                <span>
-                  <ShieldCheck size={18} />
-                  Acompañamiento profesional
-                </span>
-              </div>
-            </div>
-          </div>
-        </section>
 
         <section className="section quote-section" id="cotizar">
           <div className="container quote-grid">
@@ -663,77 +453,40 @@ function App() {
           </div>
         </section>
 
-        <section className="final-cta">
-          <div className="final-cta-bg" />
 
-          <div className="container final-cta-content">
-            <span className="eyebrow light">¿TIENES UN PROYECTO?</span>
-
-            <h2>Hagámoslo realidad.</h2>
-
-            <p>
-              Cuéntanos qué tienes en mente y encontremos juntos la mejor
-              solución.
-            </p>
-
-            <SmartWhatsAppButton
-              profile={projectProfile}
-              className="button button-primary"
-            >
-              Solicitar cotización
-            </SmartWhatsAppButton>
-          </div>
-        </section>
       </main>
 
       <footer className="footer">
         <div className="container footer-grid">
-          <div>
+          <div className="footer-compact-brand">
             <a className="brand footer-brand" href="#inicio">
               <img
-              className="brand-logo"
-              src="/kimm-logo.svg"
-              alt="Vidrios y Aluminios KIMM"
-            />
-
+                className="brand-logo"
+                src="/kimm-logo.svg"
+                alt="Vidrios y Aluminios KIMM"
+              />
               <span>
                 <strong>KIMM</strong>
                 <small>VIDRIOS & ALUMINIOS</small>
               </span>
             </a>
-
-            <p>
-              Soluciones en vidrio y aluminio para espacios que inspiran.
-            </p>
+            <p>Soluciones en vidrio y aluminio para tu espacio.</p>
           </div>
 
-          <div>
-            <span className="footer-title">Navegación</span>
-            <a href="#referencias">Referencias</a>
-            <a href="#proceso">Proceso</a>
+          <div className="footer-compact-contact">
+            <span>Medellín y área metropolitana</span>
+            <a href="#cotizar">Solicitar cotización</a>
             <SmartWhatsAppButton
-  profile={projectProfile}
-  className="footer-smart-link"
->
-  Cotizar
-</SmartWhatsAppButton>
-          </div>
-
-          <div>
-            <span className="footer-title">Contacto</span>
-            <span>Medellín & Área Metropolitana</span>
-            <SmartWhatsAppButton
-  profile={projectProfile}
-  className="footer-smart-link"
->
-  Solicitar cotización
-</SmartWhatsAppButton>
+              profile={projectProfile}
+              className="footer-smart-link"
+            >
+              Hablar por WhatsApp
+            </SmartWhatsAppButton>
           </div>
         </div>
 
         <div className="container footer-bottom">
           <span>© 2026 Vidrios y Aluminios KIMM</span>
-          <span>Diseño · Precisión · Arquitectura</span>
         </div>
       </footer>
       <SmartQuote projectDescription={projectDescription} />
