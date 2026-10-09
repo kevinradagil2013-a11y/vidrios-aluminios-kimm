@@ -2383,3 +2383,327 @@ a {
     transition: none;
   }
 }
+
+/* KIMM — Cotización inteligente por WhatsApp */
+.quote-photo-field {
+  display: block;
+  margin-top: 8px;
+  padding: 18px;
+  border: 1px dashed #cbd5dc;
+  border-radius: 10px;
+  background: #f7f9fa;
+}
+
+.quote-form .quote-photo-field input[type="file"] {
+  display: block;
+  width: 100%;
+  margin-top: 12px;
+  padding: 10px;
+  border: 1px solid #d8dde0;
+  border-radius: 7px;
+  background: #fff;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.quote-photo-field small {
+  display: block;
+  margin-top: 9px;
+  color: #69757d;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.quote-whatsapp-button {
+  display: flex;
+  width: 100%;
+  min-height: 52px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 16px;
+  padding: 15px 20px;
+  border: 1px solid #168b52;
+  border-radius: 7px;
+  background: #168b52;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.4;
+  text-align: center;
+  text-decoration: none;
+  transition: background 180ms ease, transform 180ms ease;
+}
+
+.quote-whatsapp-button:hover {
+  background: #117543;
+  transform: translateY(-1px);
+}
+
+.quote-whatsapp-button:focus-visible {
+  outline: 3px solid rgba(22, 139, 82, 0.3);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .quote-whatsapp-button {
+    transition: none;
+  }
+}
+/* KIMM — Galería de inspiración */
+.gallery-section {
+  padding-top: clamp(64px, 8vw, 112px);
+  padding-bottom: clamp(64px, 8vw, 112px);
+  background: #f6f7f6;
+}
+
+.gallery-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 28px;
+  margin-bottom: 32px;
+}
+
+.gallery-heading h2 {
+  max-width: 700px;
+  margin: 12px 0;
+  color: #172b2b;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 650;
+  letter-spacing: -0.045em;
+  line-height: 1.08;
+}
+
+.gallery-heading p {
+  max-width: 620px;
+  margin: 0;
+  color: #657170;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.gallery-count {
+  flex-shrink: 0;
+  padding-bottom: 5px;
+  color: #687472;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.gallery-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin: 28px 0;
+}
+
+.gallery-filter {
+  min-height: 42px;
+  padding: 10px 17px;
+  border: 1px solid #d9dfdc;
+  border-radius: 999px;
+  background: transparent;
+  color: #40504d;
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  transition: background 180ms ease, color 180ms ease, border-color 180ms ease;
+}
+
+.gallery-filter:hover,
+.gallery-filter.is-active {
+  border-color: #183a36;
+  background: #183a36;
+  color: #fff;
+}
+
+.gallery-filter:focus-visible,
+.gallery-card-copy a:focus-visible,
+.gallery-footer a:focus-visible {
+  outline: 3px solid #91b8ac;
+  outline-offset: 3px;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.gallery-card {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #e7eae7;
+  border-radius: 12px;
+  background: #fff;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.gallery-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 38px rgba(22, 43, 38, 0.09);
+}
+
+.gallery-image-wrap {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  background: #e8ece9;
+}
+
+.gallery-image-wrap img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 350ms ease;
+}
+
+.gallery-card:hover .gallery-image-wrap img {
+  transform: scale(1.035);
+}
+
+.gallery-image-label {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  padding: 7px 9px;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 4px;
+  background: rgba(18, 35, 32, 0.78);
+  color: #fff;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+}
+
+.gallery-card-copy {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 19px;
+}
+
+.gallery-card-category {
+  color: #74817d;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.gallery-card-copy h3 {
+  margin: 7px 0 0;
+  color: #20312e;
+  font-size: 17px;
+  font-weight: 650;
+  line-height: 1.35;
+}
+
+.gallery-card-copy a {
+  display: inline-flex;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #dce3df;
+  border-radius: 50%;
+  color: #183a36;
+  text-decoration: none;
+  transition: background 180ms ease, color 180ms ease;
+}
+
+.gallery-card-copy a:hover {
+  background: #183a36;
+  color: #fff;
+}
+
+.gallery-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 36px;
+  padding-top: 26px;
+  border-top: 1px solid #dfe4e0;
+}
+
+.gallery-footer p {
+  margin: 0;
+  color: #596763;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+@media (max-width: 900px) {
+  .gallery-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .gallery-heading {
+    align-items: start;
+  }
+}
+
+@media (max-width: 600px) {
+  .gallery-heading {
+    display: block;
+  }
+
+  .gallery-count {
+    display: inline-block;
+    margin-top: 16px;
+  }
+
+  .gallery-filters {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    scrollbar-width: thin;
+  }
+
+  .gallery-filter {
+    flex: 0 0 auto;
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    gap: 17px;
+  }
+
+  .gallery-card-copy {
+    padding: 16px;
+  }
+
+  .gallery-footer {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .gallery-footer .button {
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-card,
+  .gallery-image-wrap img,
+  .gallery-filter,
+  .gallery-card-copy a {
+    transition: none;
+  }
+
+  .gallery-card:hover {
+    transform: none;
+  }
+
+  .gallery-card:hover .gallery-image-wrap img {
+    transform: none;
+  }
+}

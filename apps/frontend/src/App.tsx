@@ -48,8 +48,64 @@ const serviceSlides = [
     image: KIMM_IMAGES.projectResidential,
   },
 ];
+
+const galleryProjects = [
+  {
+    id: 1,
+    title: "División de baño",
+    category: "Baños",
+    image: KIMM_IMAGES.projectBathroom,
+    alt: "Inspiración de diseño para baño contemporáneo",
+  },
+  {
+    id: 2,
+    title: "Ventanas y aluminio",
+    category: "Ventanería",
+    image: KIMM_IMAGES.aluminum,
+    alt: "Inspiración de ventanería y acabados modernos",
+  },
+  {
+    id: 3,
+    title: "Espejos y espacios",
+    category: "Espejos",
+    image: KIMM_IMAGES.glass,
+    alt: "Inspiración de diseño interior con superficies reflectantes",
+  },
+  {
+    id: 4,
+    title: "Arquitectura contemporánea",
+    category: "Fachadas",
+    image: KIMM_IMAGES.projectArchitecture,
+    alt: "Inspiración arquitectónica para fachadas modernas",
+  },
+  {
+    id: 5,
+    title: "Ambientes residenciales",
+    category: "Interiores",
+    image: KIMM_IMAGES.projectResidential,
+    alt: "Inspiración de diseño para espacios residenciales",
+  },
+  {
+    id: 6,
+    title: "Detalles para el baño",
+    category: "Baños",
+    image: KIMM_IMAGES.process,
+    alt: "Inspiración de acabados y detalles de interiores",
+  },
+];
+
+const galleryCategories = [
+  "Todos",
+  "Baños",
+  "Ventanería",
+  "Espejos",
+  "Fachadas",
+  "Interiores",
+];
+
 function App() {
   const [activeSlide, setActiveSlide] = useState(0);
+  const [activeGalleryCategory, setActiveGalleryCategory] = useState("Todos");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
@@ -63,6 +119,7 @@ function App() {
     return () => window.clearInterval(timer);
   }, []);
   const [submitMessage, setSubmitMessage] = useState("");
+  const [whatsAppUrl, setWhatsAppUrl] = useState("");
   const [projectDescription, setProjectDescription] = useState(() => loadProjectSession()?.description ?? "");
 
   const projectProfile = analyzeProject(projectDescription);
@@ -79,12 +136,36 @@ function App() {
     const form = event.currentTarget;
     const formData = new FormData(form);
 
+    const name = String(formData.get("name") ?? "");
+    const phone = String(formData.get("phone") ?? "");
+    const projectType = String(formData.get("projectType") ?? "");
+    const location = String(formData.get("location") ?? "");
+    const description = String(formData.get("message") ?? "").trim();
+    const quantity = String(formData.get("quantity") ?? "").trim();
+    const measurements = String(formData.get("measurements") ?? "").trim();
+    const hasPhotos = formData
+      .getAll("photos")
+      .some((item) => item instanceof File && item.size > 0);
+
+    const whatsappMessage = [
+      "Hola KIMM, quiero cotizar un proyecto.",
+      `Nombre: ${name}`,
+      `Teléfono: ${phone}`,
+      `Trabajo: ${projectType}`,
+      location ? `Ubicación: ${location}` : "",
+      quantity ? `Cantidad aproximada: ${quantity}` : "",
+      measurements ? `Medidas aproximadas: ${measurements}` : "",
+      description ? `Descripción: ${description}` : "",
+      hasPhotos ? "Tengo fotos de referencia para adjuntar en este chat." : "",
+      "Por favor, asesórenme con opciones, acabados y cotización.",
+    ].filter(Boolean).join("\n");
+
     const payload = {
-      name: String(formData.get("name") ?? ""),
-      phone: String(formData.get("phone") ?? ""),
-      projectType: String(formData.get("projectType") ?? ""),
-      location: String(formData.get("location") ?? ""),
-      message: String(formData.get("message") ?? ""),
+      name,
+      phone,
+      projectType,
+      location,
+      message: whatsappMessage,
     };
 
     const apiUrl =
@@ -92,6 +173,7 @@ function App() {
 
     setIsSubmitting(true);
     setSubmitMessage("");
+    setWhatsAppUrl("");
 
     try {
       const response = await fetch(`${apiUrl}/contacts`, {
@@ -116,6 +198,8 @@ function App() {
         "¡Solicitud enviada! Nuestro equipo recibió tus datos y se pondrá en contacto contigo."
       );
 
+      setWhatsAppUrl(buildWhatsAppUrl(whatsappMessage));
+      setProjectDescription("");
       form.reset();
     } catch (error) {
 
@@ -206,6 +290,87 @@ function App() {
   </div>
 </section>
 
+        <section className="section gallery-section" id="proyectos">
+          <div className="container">
+            <div className="gallery-heading">
+              <div>
+                <span className="eyebrow">ESPACIOS CON ESTILO</span>
+                <h2>Inspiración para tu próximo proyecto</h2>
+                <p>
+                  Explora ideas en vidrio, aluminio y diseño interior.
+                  Cuéntanos qué tienes en mente y te orientamos.
+                </p>
+              </div>
+              <span className="gallery-count">
+                {String(
+                  galleryProjects.filter(
+                    (project) =>
+                      activeGalleryCategory === "Todos" ||
+                      project.category === activeGalleryCategory
+                  ).length
+                ).padStart(2, "0")} referencias
+              </span>
+            </div>
+
+            <div className="gallery-filters" aria-label="Filtrar referencias">
+              {galleryCategories.map((category) => (
+                <button
+                  key={category}
+                  type="button"
+                  className={`gallery-filter ${
+                    activeGalleryCategory === category ? "is-active" : ""
+                  }`}
+                  aria-pressed={activeGalleryCategory === category}
+                  onClick={() => setActiveGalleryCategory(category)}
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
+
+            <div className="gallery-grid">
+              {galleryProjects
+                .filter(
+                  (project) =>
+                    activeGalleryCategory === "Todos" ||
+                    project.category === activeGalleryCategory
+                )
+                .map((project) => (
+                  <article className="gallery-card" key={project.id}>
+                    <div className="gallery-image-wrap">
+                      <img
+                        src={project.image}
+                        alt={project.alt}
+                        loading="lazy"
+                        decoding="async"
+                      />
+                      <span className="gallery-image-label">
+                        REFERENCIA DE INSPIRACIÓN
+                      </span>
+                    </div>
+                    <div className="gallery-card-copy">
+                      <div>
+                        <span className="gallery-card-category">
+                          {project.category}
+                        </span>
+                        <h3>{project.title}</h3>
+                      </div>
+                      <a href="#cotizar" aria-label={`Cotizar ${project.title}`}>
+                        <ArrowRight size={19} />
+                      </a>
+                    </div>
+                  </article>
+                ))}
+            </div>
+
+            <div className="gallery-footer">
+              <p>¿Tienes una idea diferente? La convertimos en un plan de trabajo.</p>
+              <a className="button button-primary" href="#cotizar">
+                Cuéntanos tu proyecto <ArrowRight size={17} />
+              </a>
+            </div>
+          </div>
+        </section>
                 <section className="promo promo-exotic">
           <div className="container promo-exotic-inner">
 
@@ -361,13 +526,14 @@ function App() {
                 <label>
                   Tipo de proyecto
                   <select name="projectType" defaultValue="" required>
-                    <option value="" disabled>
-                      Selecciona una opción
-                    </option>
-                    <option value="residencial">Residencial</option>
-                    <option value="comercial">Comercial</option>
-                    <option value="oficina">Oficina</option>
-                    <option value="otro">Otro</option>
+                    <option value="" disabled>Selecciona el tipo de trabajo</option>
+                    <option value="Ventanas">Ventanas</option>
+                    <option value="Puertas">Puertas</option>
+                    <option value="Ventanales">Ventanales</option>
+                    <option value="Divisiones de baño">Divisiones de baño</option>
+                    <option value="Barandas">Barandas</option>
+                    <option value="Espejos">Espejos</option>
+                    <option value="Otro proyecto">Otro proyecto</option>
                   </select>
                 </label>
 
@@ -377,6 +543,28 @@ function App() {
                     name="location"
                     type="text"
                     placeholder="Ej. Medellín, Envigado..."
+                  />
+                </label>
+              </div>
+
+              <div className="form-row">
+                <label>
+                  Cantidad aproximada
+                  <input
+                    name="quantity"
+                    type="number"
+                    min="1"
+                    step="1"
+                    placeholder="Ej. 3"
+                  />
+                </label>
+
+                <label>
+                  Medidas aproximadas
+                  <input
+                    name="measurements"
+                    type="text"
+                    placeholder="Ej. 1,20 m × 2,00 m"
                   />
                 </label>
               </div>
@@ -430,8 +618,18 @@ function App() {
                 )}
               </label>
 
+              <label className="quote-photo-field">
+                Fotos de referencia (opcional)
+                <input
+                  name="photos"
+                  type="file"
+                  accept="image/*"
+                  multiple
+                />
+                <small>Si seleccionas fotos, recuerda adjuntarlas en el chat de WhatsApp.</small>
+              </label>
               <button
-                className="button button-dark"
+                className="quote-whatsapp-button"
                 type="submit"
                 disabled={isSubmitting}
               >
@@ -443,6 +641,17 @@ function App() {
                 <p className="form-status" role="status">
                   {submitMessage}
                 </p>
+              )}
+
+              {whatsAppUrl && (
+                <a
+                  className="quote-whatsapp-button"
+                  href={whatsAppUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Continuar cotización por WhatsApp
+                </a>
               )}
 
               <p className="form-disclaimer">
