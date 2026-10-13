@@ -355,7 +355,14 @@ function App() {
                         </span>
                         <h3>{project.title}</h3>
                       </div>
-                      <a href="#cotizar" aria-label={`Cotizar ${project.title}`}>
+                      <a
+                        href={buildWhatsAppUrl(
+                          `Hola, equipo KIMM. 👋 Me interesa cotizar un proyecto de ${project.title.toLowerCase()} (${project.category}). Quisiera conocer opciones, acabados, precios y disponibilidad. ¿Me pueden asesorar?`
+                        )}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label={`Cotizar ${project.title} por WhatsApp`}
+                      >
                         <ArrowRight size={19} />
                       </a>
                     </div>
