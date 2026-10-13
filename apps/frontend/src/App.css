@@ -2373,8 +2373,10 @@ a {
   }
 
   .hero.hero-carousel .hero-actions .button {
-    min-height: 49px;
-    padding: 12px 17px;
+    min-height: 52px;
+    padding: 13px 18px;
+    font-size: 0.9rem;
+    font-weight: 700;
   }
 }
 
